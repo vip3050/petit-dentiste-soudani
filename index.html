@@ -242,7 +242,8 @@ const I18N = {
  scaleTip:"Frotte le tartre avec le détartreur !",drillTip:"Maintiens la turbine sur les caries !",fillTip:"Dépose la pâte composite avec la spatule !",toolDrill:"Turbine",toolFill:"Spatule",shadeTip:"Choisis la teinte EXACTE de la couronne !",crownTip:"Tape sur la dent cassée pour poser la couronne !",polishTip:"Fais briller toutes les dents !",
  gentleWarn:"Doucement sur les gencives !",timeUp:"Le temps file !",
  ranks:["Stagiaire","Assistant(e)","Dentiste","Chirurgien(ne)","Implantologue Expert"],
- missions:{scale:"Mission : enlever tout le tartre 🪥",cavity:"Mission : soigner les caries 🦷",crown:"Mission : poser une couronne zircone 👑"},
+ missions:{scale:"Mission : enlever tout le tartre 🪥",cavity:"Mission : soigner les caries 🦷",crown:"Mission : poser une couronne zircone 👑",implant:"Mission : poser un implant en titane 🔩"},
+ implantDrillTip:"Maintiens la turbine sur la cible pour forer l'os !",implantScrewTip:"Tape plusieurs fois sur l'implant pour le visser !",
  facts:["<b>Le saviez-vous ?</b> Un détartrage régulier (1 à 2 fois par an) protège vos gencives. Le Cabinet Soudani vous accueille à Saïda & Oran !","<b>Le saviez-vous ?</b> Une carie soignée tôt, c'est sans douleur ! N'attendez pas d'avoir mal pour consulter.","<b>Le saviez-vous ?</b> Les couronnes en zircone du Cabinet Soudani sont conçues avec un scanner 3D pour un sourire parfait.","<b>Le saviez-vous ?</b> Un implant en titane bien entretenu peut durer toute la vie !","<b>Le saviez-vous ?</b> Se brosser les dents 2 fois par jour pendant 2 minutes, c'est le secret d'un sourire en or.","<b>Le saviez-vous ?</b> Le Cabinet Soudani soigne les sourires de l'ouest algérien depuis 1996 !"]},
  ar:{title:"طبيب الأسنان<br>الصغير سوداني",subtitle:"عيادة سوداني • سعيدة و وهران",play:"إلعب",tag:'اللعبة الرسمية لـ <a href="https://cabinetsoudani.com" target="_blank" rel="noopener noreferrer">عيادة سوداني</a> — منذ 1996',
  chooseDoc:"!اختر طبيبك",chooseDocSub:"أبطال عيادة سوداني الحقيقيون",nagibSpec:"خبير زراعة الأسنان",ihabSpec:"بطل الابتسامة",continue:"واصل",
@@ -251,7 +252,8 @@ const I18N = {
  scaleTip:"!افرك الجير بالمقلحة",drillTip:"!ثبّت التوربين على التسوس",fillTip:"!ضع حشوة الكومبوزيت بالملعقة",toolDrill:"توربين",toolFill:"ملعقة",shadeTip:"!اختر لون التاج الصحيح",crownTip:"!اضغط على السن المكسور لوضع التاج",polishTip:"!لمّع كل الأسنان",
  gentleWarn:"!برفق على اللثة",timeUp:"!الوقت يمر",
  ranks:["متدرب","مساعد","طبيب أسنان","جراح","خبير زراعة الأسنان"],
- missions:{scale:"🪥 المهمة: إزالة كل الجير",cavity:"🦷 المهمة: علاج التسوس",crown:"👑 المهمة: تركيب تاج الزركون"},
+ missions:{scale:"🪥 المهمة: إزالة كل الجير",cavity:"🦷 المهمة: علاج التسوس",crown:"👑 المهمة: تركيب تاج الزركون",implant:"🔩 المهمة: زرع غرسة تيتانيوم"},
+ implantDrillTip:"!ثبّت التوربين على الهدف لحفر العظم",implantScrewTip:"!انقر عدة مرات لتثبيت الغرسة",
  facts:["<b>هل تعلم؟</b> تنظيف الجير مرة أو مرتين في السنة يحمي لثتك. عيادة سوداني تستقبلكم في سعيدة ووهران!","<b>هل تعلم؟</b> علاج التسوس مبكرًا غير مؤلم! لا تنتظر الألم.","<b>هل تعلم؟</b> تيجان الزركون في عيادة سوداني تُصمم بماسح ثلاثي الأبعاد لابتسامة مثالية.","<b>هل تعلم؟</b> زرعة التيتانيوم المعتنى بها تدوم مدى الحياة!","<b>هل تعلم؟</b> تنظيف الأسنان مرتين يوميًا لمدة دقيقتين هو سر الابتسامة الذهبية.","<b>هل تعلم؟</b> عيادة سوداني تعتني بابتسامات الغرب الجزائري منذ 1996!"]}
 };
 let lang = localStorage.getItem('pds_lang') || 'fr';
@@ -277,11 +279,12 @@ const PATIENTS=[
 const LEVELS=[
  {type:'scale',n:3,time:60},{type:'scale',n:4,time:60},{type:'cavity',n:2,time:70},{type:'scale',n:5,time:60},
  {type:'cavity',n:2,time:70},{type:'crown',time:60},{type:'scale',n:6,time:60},{type:'cavity',n:3,time:75},
- {type:'crown',time:55},{type:'scale',n:7,time:60},{type:'cavity',n:3,time:75},{type:'crown',time:50}
+ {type:'crown',time:55},{type:'scale',n:7,time:60},{type:'cavity',n:3,time:75},{type:'crown',time:50},
+ {type:'implant',time:80},{type:'scale',n:8,time:60},{type:'cavity',n:4,time:75},{type:'implant',time:70}
 ];
 const SVG_TURBINE='<svg viewBox="0 0 64 64" width="1.35em" height="1.35em" style="vertical-align:middle"><rect x="2" y="34" width="42" height="13" rx="6.5" transform="rotate(-35 23 40)" fill="#12a5b0"/><rect x="4" y="43" width="14" height="7" rx="3.5" transform="rotate(-35 11 46)" fill="#0b6e78"/><circle cx="45" cy="17" r="10" fill="#0b6e78"/><circle cx="45" cy="17" r="4" fill="#7fd8de"/><rect x="42.5" y="26" width="5" height="13" rx="2.5" fill="#98a4ad"/><path d="M42.5 36 L47.5 36 L45 42 Z" fill="#6d7a84"/></svg>';
 const SVG_SPATULA='<svg viewBox="0 0 64 64" width="1.35em" height="1.35em" style="vertical-align:middle"><rect x="2" y="44" width="30" height="8" rx="4" transform="rotate(-35 17 48)" fill="#c98f00"/><rect x="24" y="26" width="18" height="7" rx="3.5" transform="rotate(-35 33 29)" fill="#dfe3e8"/><path d="M36 6 Q56 8 54 26 Q52 38 38 34 Q28 30 30 18 Q32 8 36 6Z" fill="#e8eef2"/><circle cx="46" cy="15" r="8" fill="#fdfdf6" stroke="#d8d2c0" stroke-width="2.5"/><circle cx="42" cy="20" r="4" fill="#f3ead0"/></svg>';
-const GAME_ICON={scale:'🪥',cavity:SVG_TURBINE,crown:'👑'};
+const GAME_ICON={scale:'🪥',cavity:SVG_TURBINE,crown:'👑',implant:'🔩'};
 
 /* ================= helpers ================= */
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
@@ -408,17 +411,28 @@ function buildMouth(lv){
  const positions=[];
  // arc of 10 teeth top + 10 bottom
  for(let r=0;r<2;r++)for(let i=0;i<8;i++){
-   const cx=52+i*37, cy=r===0?120:300, h=r===0?70:66;
+   const cx=52+i*37, cy=r===0?120:300, h=(r===0?70:66)+(i%2?0:4);
    positions.push({cx,cy:r===0?cy:cy, top:r===0});
-   teeth+=`<rect class="tooth" data-ti="${r*8+i}" x="${cx-16}" y="${r===0?cy-h:cy-4}" width="32" height="${h}" rx="13" fill="#fdfdf6" stroke="#e7e2d0" stroke-width="2"/>`;
+   const ty=r===0?cy-h:cy-4, ti=r*8+i;
+   teeth+=`<rect class="tooth" data-ti="${ti}" x="${cx-16}" y="${ty}" width="32" height="${h}" rx="14" fill="url(#toothG)" stroke="#dce8ea" stroke-width="2.5"/>
+   <ellipse class="shine" data-si="${ti}" cx="${cx-7}" cy="${ty+17}" rx="4.5" ry="10" fill="rgba(255,255,255,.95)"/>
+   <ellipse class="shine2" data-si="${ti}" cx="${cx+8}" cy="${ty+12}" rx="2" ry="4" fill="rgba(255,255,255,.7)"/>`;
  }
- // gums
- const gums=`<path d="M20 128 Q180 30 340 128 L340 60 Q180 -30 20 60 Z" fill="#ff97a8"/>
-             <path d="M20 296 Q180 396 340 296 L340 372 Q180 470 20 372 Z" fill="#ff97a8"/>`;
+ // gums + tongue
+ const gums=`<path d="M20 128 Q180 30 340 128 L340 60 Q180 -30 20 60 Z" fill="url(#gumG)"/>
+             <path d="M20 296 Q180 396 340 296 L340 372 Q180 470 20 372 Z" fill="url(#gumG)"/>
+             <path d="M20 128 Q180 34 340 128" stroke="rgba(255,255,255,.35)" stroke-width="6" fill="none"/>`;
  stage.innerHTML=`<svg viewBox="0 0 ${W} ${H}" id="mouthSvg">
-   <defs><radialGradient id="thr" cx="50%" cy="50%"><stop offset="0%" stop-color="#5e1f2b"/><stop offset="100%" stop-color="#8c2f39"/></radialGradient></defs>
+   <defs>
+     <radialGradient id="thr" cx="50%" cy="50%"><stop offset="0%" stop-color="#5e1f2b"/><stop offset="100%" stop-color="#8c2f39"/></radialGradient>
+     <linearGradient id="toothG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="65%" stop-color="#fdfaf0"/><stop offset="100%" stop-color="#f0e9d4"/></linearGradient>
+     <linearGradient id="gumG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffb9c6"/><stop offset="100%" stop-color="#ff8fa3"/></linearGradient>
+     <radialGradient id="tongueG" cx="50%" cy="35%"><stop offset="0%" stop-color="#ff9fb0"/><stop offset="100%" stop-color="#e56377"/></radialGradient>
+   </defs>
    <rect x="0" y="0" width="${W}" height="${H}" fill="none"/>
    <ellipse cx="180" cy="212" rx="150" ry="105" fill="url(#thr)"/>
+   <ellipse cx="180" cy="252" rx="86" ry="44" fill="url(#tongueG)"/>
+   <path d="M180 218 Q180 252 180 286" stroke="rgba(180,50,70,.4)" stroke-width="5" fill="none" stroke-linecap="round"/>
    ${gums}${teeth}<g id="ovl"></g>
  </svg>`;
  G.positions=positions;
@@ -426,6 +440,7 @@ function buildMouth(lv){
  if(lv.type==='scale')buildScale(ovl,lv);
  if(lv.type==='cavity')buildCavity(ovl,lv);
  if(lv.type==='crown')buildCrown(ovl,lv);
+ if(lv.type==='implant')buildImplant(ovl,lv);
 }
 const svgPoint=(e)=>{
  const svg=stage.querySelector('svg'),r=stage.getBoundingClientRect();
@@ -514,12 +529,75 @@ function buildCavity(ovl,lv){
  stage.onpointermove=e=>{const r=app.getBoundingClientRect();const tc=$('#toolCursor');if(tc.style.display==='block'){tc.style.left=(e.clientX-r.left)+'px';tc.style.top=(e.clientY-r.top)+'px';}};
 }
 
+/* ---------- MINI-GAME 4 : IMPLANT TITANE (forage + vissage + couronne) ---------- */
+function buildImplant(ovl,lv){
+ const NS='http://www.w3.org/2000/svg';
+ G.phase='forage';
+ $('#toolTip').textContent=t('implantDrillTip');
+ // missing tooth: remove one top tooth to create the gap
+ const ti=4;const p=G.positions[ti];
+ const toothEl=stage.querySelector(`.tooth[data-ti="${ti}"]`);if(toothEl)toothEl.remove();
+ stage.querySelectorAll(`.shine[data-si="${ti}"],.shine2[data-si="${ti}"]`).forEach(s=>s.remove());
+ const cx=p.cx, sy=p.cy-30;
+ // socket target + progress ring
+ const tgt=document.createElementNS(NS,'g');
+ tgt.innerHTML=`<circle cx="${cx}" cy="${sy}" r="18" fill="rgba(140,47,57,.4)" stroke="#3ecf8e" stroke-width="3" stroke-dasharray="6 6"/>
+ <circle class="ring2" cx="${cx}" cy="${sy}" r="26" fill="none" stroke="#f5b301" stroke-width="6" stroke-linecap="round" stroke-dasharray="163" stroke-dashoffset="163" transform="rotate(-90 ${cx} ${sy})"/>`;
+ ovl.appendChild(tgt);
+ $('#toolCursor').innerHTML=SVG_TURBINE;
+ let prog=0,drillTimer=null;
+ stage.onpointerdown=e=>{
+  if(!G||G.phase!=='forage')return;
+  const {x,y}=svgPoint(e);const r=app.getBoundingClientRect();
+  const tc=$('#toolCursor');tc.style.display='block';tc.style.left=(e.clientX-r.left)+'px';tc.style.top=(e.clientY-r.top)+'px';
+  if(Math.hypot(x-cx,y-sy)<48){
+    drillTimer=setInterval(()=>{
+      if(!G){clearInterval(drillTimer);return;}
+      prog+=6;sfx.drill();vibrate(12);
+      tgt.querySelector('.ring2').style.strokeDashoffset=163*Math.max(0,100-prog)/100;
+      if(prog>=100){clearInterval(drillTimer);drillTimer=null;startScrew();}
+    },80);
+  }
+ };
+ stage.onpointerup=stage.onpointercancel=()=>{if(drillTimer){clearInterval(drillTimer);drillTimer=null;}$('#toolCursor').style.display='none';};
+ function startScrew(){
+  G.phase='screw';sfx.ok();vibrate(40);
+  $('#toolTip').textContent=t('implantScrewTip');
+  tgt.remove();$('#toolCursor').style.display='none';
+  const imp=document.createElementNS(NS,'g');
+  imp.innerHTML=`<rect x="-7" y="-24" width="14" height="42" rx="5" fill="#c3ced6"/>
+   <path d="M-7 -12 H7 M-7 -2 H7 M-7 8 H7" stroke="#8b98a2" stroke-width="3.5"/>
+   <rect x="-11" y="-32" width="22" height="9" rx="4" fill="#98a4ad"/>
+   <ellipse cx="-3" cy="-18" rx="2" ry="8" fill="rgba(255,255,255,.7)"/>`;
+  ovl.appendChild(imp);
+  let depth=0;const maxD=5,yStart=sy-42;
+  imp.setAttribute('transform',`translate(${cx} ${yStart})`);
+  stage.onpointerdown=e=>{
+   if(!G||G.phase!=='screw')return;
+   const {x,y}=svgPoint(e);
+   if(Math.hypot(x-cx,y-sy)<75){
+     depth++;sfx.pop();vibrate(25);
+     imp.setAttribute('transform',`translate(${cx} ${yStart+depth*8}) rotate(${depth*30})`);
+     const r2=app.getBoundingClientRect();sparkle(e.clientX-r2.left,e.clientY-r2.top,'🔩');
+     if(depth>=maxD){
+       imp.setAttribute('transform',`translate(${cx} ${yStart+maxD*8})`);
+       G.phase='place';$('#toolTip').textContent=t('crownTip');
+       stage.onpointerdown=null;
+       G.crownSpot={cx,cy:sy-26,ti,crack:{remove(){}}};
+       setTimeout(()=>placeCrownPhase(ovl),350);
+     }
+   }
+  };
+ }
+}
+
 /* ---------- MINI-GAME 3 : COURONNE ZIRCONE (shade + place) ---------- */
 function buildCrown(ovl,lv){
  G.phase='shade';
  $('#toolTip').textContent=t('shadeTip');
  // broken tooth: pick one top-front tooth
  const ti=3;const p=G.positions[ti];
+ stage.querySelectorAll(`.shine[data-si="${ti}"],.shine2[data-si="${ti}"]`).forEach(s=>s.remove());
  const toothEl=stage.querySelector(`.tooth[data-ti="${ti}"]`);
  toothEl.setAttribute('fill','#e7e2d0');
  toothEl.setAttribute('height','30'); // broken stub
@@ -543,7 +621,7 @@ function placeCrownPhase(ovl){
  const {cx,cy}=G.crownSpot;
  // moving crown oscillates horizontally; tap when aligned
  const crown=document.createElementNS('http://www.w3.org/2000/svg','g');
- crown.innerHTML=`<rect x="-16" y="-34" width="32" height="44" rx="13" fill="#fdfdf6" stroke="#c9e6ea" stroke-width="3"/><text x="0" y="-40" text-anchor="middle" font-size="16">👑</text>`;
+ crown.innerHTML=`<rect x="-16" y="-34" width="32" height="44" rx="13" fill="url(#toothG)" stroke="#c9e6ea" stroke-width="3"/><ellipse cx="-6" cy="-18" rx="4" ry="9" fill="rgba(255,255,255,.95)"/><text x="0" y="-40" text-anchor="middle" font-size="16">👑</text>`;
  ovl.appendChild(crown);
  // target marker
  const tgt=document.createElementNS('http://www.w3.org/2000/svg','circle');
@@ -577,7 +655,7 @@ function finish(){
  let cleared=true;
  if(G.type==='scale')cleared=G.targets.every(t=>t.hp<=0);
  if(G.type==='cavity')cleared=G.targets.every(t=>t.state==='filled');
- if(G.type==='crown')cleared=G.phase==='done';
+ if(G.type==='crown'||G.type==='implant')cleared=G.phase==='done';
  let stars=0;
  if(cleared){stars=1;if(G.penalty<=1)stars=2;if(G.penalty===0&&timeRatio>.25)stars=3;}
  const coins=cleared?(10+stars*10+Math.round(timeRatio*10)):3;
