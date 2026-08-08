@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0b6e78">
-<title>Petit Dentiste Soudani 🦷</title>
+<title>Super Dentiste 🦷</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Cairo:wght@600;700;900&display=swap" rel="stylesheet">
@@ -130,7 +130,7 @@ canvas#fx{position:absolute;inset:0;pointer-events:none;z-index:9}
     <button class="btn btn-ghost lang-toggle" id="langBtn">العربية</button>
     <div style="flex:1"></div>
     <div class="logo-tooth">🦷</div>
-    <h1 class="title" data-i18n="title">Petit Dentiste<br>Soudani<small data-i18n="subtitle">Cabinet Soudani • Saïda & Oran</small></h1>
+    <h1 class="title" data-i18n="title">Super<br>Dentiste<small>Le jeu du Cabinet Soudani</small></h1>
     <div style="flex:1"></div>
     <button class="btn btn-primary" id="playBtn" data-i18n="play">JOUER</button>
     <div style="height:12px"></div>
@@ -235,7 +235,7 @@ canvas#fx{position:absolute;inset:0;pointer-events:none;z-index:9}
 "use strict";
 /* ================= i18n ================= */
 const I18N = {
- fr:{title:"Petit Dentiste<br>Soudani",subtitle:"Cabinet Soudani • Saïda & Oran",play:"JOUER",tag:'Le jeu officiel du <a href="https://cabinetsoudani.com" target="_blank" rel="noopener noreferrer">Cabinet Soudani</a> — depuis 1996',
+ fr:{title:"Super<br>Dentiste<small>Le jeu du Cabinet Soudani</small>",subtitle:"Cabinet Soudani",play:"JOUER",tag:'Le jeu officiel du <a href="https://cabinetsoudani.com" target="_blank" rel="noopener noreferrer">Cabinet Soudani</a> — depuis 1996',
  chooseDoc:"Choisis ton dentiste !",chooseDocSub:"Les vrais héros du Cabinet Soudani",nagibSpec:"Implantologue expert",ihabSpec:"As du sourire",continue:"Continuer",
  clinicMap:"Le Cabinet",clinicMapSub:"Soigne les patients pour devenir Implantologue Expert !",rdv:"📅 Vrai RDV",call:"📞 Appeler",treat:"Soigner !",replay:"🔄 Rejouer",next:"Suivant ➜",rdvLong:"📅 Prendre un vrai rendez-vous",
  level:"Niveau",perfect:"Sourire parfait !",great:"Super travail !",good:"Bien joué !",oops:"Presque...",
@@ -246,8 +246,8 @@ const I18N = {
  implantDrillTip:"Maintiens la turbine sur la cible pour forer l'os !",implantScrewTip:"Tape plusieurs fois sur l'implant pour le visser !",
  germsTip:"Tape sur les microbes avant la fin du temps !",brushTip:"Brosse toutes les dents jaunies pour les faire briller !",
  radioTip:"Tape quand le scanner passe sur la dent qui brille !",orthoTip:"Tape sur les dents penchées pour les redresser !",sugarTip:"Détruis les bonbons avant qu'ils touchent les dents !",flossTip:"Frotte entre les dents pour enlever les restes !",whitenTip:"Maintiens la lampe sur chaque dent jaunie !",rinseTip:"Tape vite partout pour faire mousser !",memoryTip:"Retrouve les paires d'instruments !",catchTip:"Glisse le panier pour attraper les dents de lait !",bubblesTip:"Éclate les bulles dans l'ordre : 1, 2, 3... !",quizTip:"Réponds aux questions du docteur !",vrai:"VRAI ✓",faux:"FAUX ✗",
- facts:["<b>Le saviez-vous ?</b> Un détartrage régulier (1 à 2 fois par an) protège vos gencives. Le Cabinet Soudani vous accueille à Saïda & Oran !","<b>Le saviez-vous ?</b> Une carie soignée tôt, c'est sans douleur ! N'attendez pas d'avoir mal pour consulter.","<b>Le saviez-vous ?</b> Les couronnes en zircone du Cabinet Soudani sont conçues avec un scanner 3D pour un sourire parfait.","<b>Le saviez-vous ?</b> Un implant en titane bien entretenu peut durer toute la vie !","<b>Le saviez-vous ?</b> Se brosser les dents 2 fois par jour pendant 2 minutes, c'est le secret d'un sourire en or.","<b>Le saviez-vous ?</b> Le Cabinet Soudani soigne les sourires de l'ouest algérien depuis 1996 !"]},
- ar:{title:"طبيب الأسنان<br>الصغير سوداني",subtitle:"عيادة سوداني • سعيدة و وهران",play:"إلعب",tag:'اللعبة الرسمية لـ <a href="https://cabinetsoudani.com" target="_blank" rel="noopener noreferrer">عيادة سوداني</a> — منذ 1996',
+ facts:["<b>Le saviez-vous ?</b> Un détartrage régulier (1 à 2 fois par an) protège vos gencives et garde votre sourire éclatant !","<b>Le saviez-vous ?</b> Une carie soignée tôt, c'est sans douleur ! N'attendez pas d'avoir mal pour consulter.","<b>Le saviez-vous ?</b> Les couronnes en zircone du Cabinet Soudani sont conçues avec un scanner 3D pour un sourire parfait.","<b>Le saviez-vous ?</b> Un implant en titane bien entretenu peut durer toute la vie !","<b>Le saviez-vous ?</b> Se brosser les dents 2 fois par jour pendant 2 minutes, c'est le secret d'un sourire en or.","<b>Le saviez-vous ?</b> Le Cabinet Soudani prend soin des sourires depuis 1996 !"]},
+ ar:{title:"سوبر<br>طبيب الأسنان<small>لعبة عيادة سوداني</small>",subtitle:"عيادة سوداني",play:"إلعب",tag:'اللعبة الرسمية لـ <a href="https://cabinetsoudani.com" target="_blank" rel="noopener noreferrer">عيادة سوداني</a> — منذ 1996',
  chooseDoc:"!اختر طبيبك",chooseDocSub:"أبطال عيادة سوداني الحقيقيون",nagibSpec:"خبير زراعة الأسنان",ihabSpec:"بطل الابتسامة",continue:"واصل",
  clinicMap:"العيادة",clinicMapSub:"!عالج المرضى لتصبح خبير زراعة الأسنان",rdv:"📅 موعد حقيقي",call:"📞 اتصل",treat:"!عالج",replay:"🔄 أعد اللعب",next:"➜ التالي",rdvLong:"📅 احجز موعدًا حقيقيًا",
  level:"مستوى",perfect:"!ابتسامة مثالية",great:"!عمل رائع",good:"!أحسنت",oops:"...تقريبا",
@@ -258,7 +258,7 @@ const I18N = {
  implantDrillTip:"!ثبّت التوربين على الهدف لحفر العظم",implantScrewTip:"!انقر عدة مرات لتثبيت الغرسة",
  germsTip:"!اضغط على الجراثيم قبل نهاية الوقت",brushTip:"!نظّف كل الأسنان الصفراء حتى تلمع",
  radioTip:"!اضغط عندما يمر الماسح على السن اللامع",orthoTip:"!اضغط على الأسنان المائلة لتقويمها",sugarTip:"!دمّر الحلوى قبل أن تلمس الأسنان",flossTip:"!افرك بين الأسنان لإزالة البقايا",whitenTip:"!ثبّت المصباح على كل سن أصفر",rinseTip:"!انقر بسرعة في كل مكان لعمل الرغوة",memoryTip:"!اعثر على أزواج الأدوات",catchTip:"!حرّك السلة لالتقاط أسنان الحليب",bubblesTip:"!فرقع الفقاعات بالترتيب: 1، 2، 3",quizTip:"!أجب على أسئلة الطبيب",vrai:"✓ صحيح",faux:"✗ خطأ",
- facts:["<b>هل تعلم؟</b> تنظيف الجير مرة أو مرتين في السنة يحمي لثتك. عيادة سوداني تستقبلكم في سعيدة ووهران!","<b>هل تعلم؟</b> علاج التسوس مبكرًا غير مؤلم! لا تنتظر الألم.","<b>هل تعلم؟</b> تيجان الزركون في عيادة سوداني تُصمم بماسح ثلاثي الأبعاد لابتسامة مثالية.","<b>هل تعلم؟</b> زرعة التيتانيوم المعتنى بها تدوم مدى الحياة!","<b>هل تعلم؟</b> تنظيف الأسنان مرتين يوميًا لمدة دقيقتين هو سر الابتسامة الذهبية.","<b>هل تعلم؟</b> عيادة سوداني تعتني بابتسامات الغرب الجزائري منذ 1996!"]}
+ facts:["<b>هل تعلم؟</b> تنظيف الجير مرة أو مرتين في السنة يحمي لثتك ويحافظ على ابتسامتك!","<b>هل تعلم؟</b> علاج التسوس مبكرًا غير مؤلم! لا تنتظر الألم.","<b>هل تعلم؟</b> تيجان الزركون في عيادة سوداني تُصمم بماسح ثلاثي الأبعاد لابتسامة مثالية.","<b>هل تعلم؟</b> زرعة التيتانيوم المعتنى بها تدوم مدى الحياة!","<b>هل تعلم؟</b> تنظيف الأسنان مرتين يوميًا لمدة دقيقتين هو سر الابتسامة الذهبية.","<b>هل تعلم؟</b> عيادة سوداني تعتني بالابتسامات منذ 1996!"]}
 };
 let lang = localStorage.getItem('pds_lang') || 'fr';
 const t = k => I18N[lang][k];

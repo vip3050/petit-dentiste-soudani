@@ -1,8 +1,8 @@
-# 🦷 Petit Dentiste Soudani
+# 🦷 Super Dentiste
 
-Jeu mobile HTML5 officiel du **[Cabinet Soudani](https://cabinetsoudani.com)** — Dentiste & Implantologue à Saïda et Oran (Drs Keirless, depuis 1996).
+Jeu mobile HTML5 officiel du **[Cabinet Soudani](https://cabinetsoudani.com)** (Drs Keirless, depuis 1996).
 
-Deviens dentiste avec **Dr Nagib** et **Dr Ihab** : détartre, soigne les caries et pose des couronnes zircone pour rendre le sourire à tes patients !
+Deviens dentiste avec **Dr Nagib** et **Dr Ihab** : 16 types de soins, 40 niveaux !
 
 ## 🎮 Jouer
 
@@ -13,19 +13,13 @@ Optimisé pour mobile Android : ajoute la page à ton écran d'accueil pour une 
 ## ✨ Fonctionnalités
 
 - 👨‍⚕️ 2 dentistes jouables : Dr Nagib & Dr Ihab (les vrais héros du cabinet !)
-- 🪥 3 mini-jeux tactiles : détartrage, soin de carie + composite, pose de couronne zircone
-- 🗺️ 12 niveaux, 6 patients rigolos, difficulté progressive
-- ⭐ Système d'étoiles, pièces d'or et grades (Stagiaire → Implantologue Expert)
+- 🎮 16 mini-jeux tactiles : détartrage, caries (turbine + spatule composite), couronne zircone, implant titane (forage → vissage → couronne), chasse aux microbes, brossage éclat, radio panoramique, orthodontie, pluie de bonbons, fil dentaire, blanchiment laser, bain de bouche, memory, attrape dents de lait, bulles magiques, quiz du docteur
+- 🗺️ 40 niveaux, 6 patients rigolos, difficulté progressive
+- ⭐ Étoiles, pièces d'or et grades (Stagiaire → Implantologue Expert)
 - 🇫🇷/🇩🇿 Bilingue français / arabe (RTL)
-- 🔊 Sons, vibrations, confettis
-- 💾 Sauvegarde automatique (localStorage)
-- 📅 Prise de vrai rendez-vous intégrée : [cabinetsoudani.com](https://cabinetsoudani.com) • ☎️ 040 67 88 88
+- 🔊 Sons, vibrations, confettis — 💾 sauvegarde automatique
+- 📅 Prise de vrai rendez-vous intégrée : [cabinetsoudani.com](https://cabinetsoudani.com)
 
 ## 🌐 Hébergement GitHub Pages
 
 Settings → Pages → Source : branche `main`, dossier `/ (root)` → Save.
-Le jeu sera accessible sur `https://<user>.github.io/petit-dentiste-soudani/`
-
-## 📍 Cabinet Soudani
-
-Cité El Riadh Bloc 06 N17, Saïda 20000, Algérie — Tél : 040 67 88 88 / 0770 12 10 60
