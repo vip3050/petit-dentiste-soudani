@@ -239,7 +239,7 @@ const I18N = {
  chooseDoc:"Choisis ton dentiste !",chooseDocSub:"Les vrais héros du Cabinet Soudani",nagibSpec:"Implantologue expert",ihabSpec:"As du sourire",continue:"Continuer",
  clinicMap:"Le Cabinet",clinicMapSub:"Soigne les patients pour devenir Implantologue Expert !",rdv:"📅 Vrai RDV",call:"📞 Appeler",treat:"Soigner !",replay:"🔄 Rejouer",next:"Suivant ➜",rdvLong:"📅 Prendre un vrai rendez-vous",
  level:"Niveau",perfect:"Sourire parfait !",great:"Super travail !",good:"Bien joué !",oops:"Presque...",
- scaleTip:"Frotte le tartre avec le détartreur !",drillTip:"Maintiens la fraise sur les caries !",fillTip:"Tape sur les trous pour poser le composite !",shadeTip:"Choisis la teinte EXACTE de la couronne !",crownTip:"Tape sur la dent cassée pour poser la couronne !",polishTip:"Fais briller toutes les dents !",
+ scaleTip:"Frotte le tartre avec le détartreur !",drillTip:"Maintiens la turbine sur les caries !",fillTip:"Dépose la pâte composite avec la spatule !",toolDrill:"Turbine",toolFill:"Spatule",shadeTip:"Choisis la teinte EXACTE de la couronne !",crownTip:"Tape sur la dent cassée pour poser la couronne !",polishTip:"Fais briller toutes les dents !",
  gentleWarn:"Doucement sur les gencives !",timeUp:"Le temps file !",
  ranks:["Stagiaire","Assistant(e)","Dentiste","Chirurgien(ne)","Implantologue Expert"],
  missions:{scale:"Mission : enlever tout le tartre 🪥",cavity:"Mission : soigner les caries 🦷",crown:"Mission : poser une couronne zircone 👑"},
@@ -248,7 +248,7 @@ const I18N = {
  chooseDoc:"!اختر طبيبك",chooseDocSub:"أبطال عيادة سوداني الحقيقيون",nagibSpec:"خبير زراعة الأسنان",ihabSpec:"بطل الابتسامة",continue:"واصل",
  clinicMap:"العيادة",clinicMapSub:"!عالج المرضى لتصبح خبير زراعة الأسنان",rdv:"📅 موعد حقيقي",call:"📞 اتصل",treat:"!عالج",replay:"🔄 أعد اللعب",next:"➜ التالي",rdvLong:"📅 احجز موعدًا حقيقيًا",
  level:"مستوى",perfect:"!ابتسامة مثالية",great:"!عمل رائع",good:"!أحسنت",oops:"...تقريبا",
- scaleTip:"!افرك الجير بالمقلحة",drillTip:"!ثبّت الحفّار على التسوس",fillTip:"!اضغط على الثقوب لوضع الحشوة",shadeTip:"!اختر لون التاج الصحيح",crownTip:"!اضغط على السن المكسور لوضع التاج",polishTip:"!لمّع كل الأسنان",
+ scaleTip:"!افرك الجير بالمقلحة",drillTip:"!ثبّت التوربين على التسوس",fillTip:"!ضع حشوة الكومبوزيت بالملعقة",toolDrill:"توربين",toolFill:"ملعقة",shadeTip:"!اختر لون التاج الصحيح",crownTip:"!اضغط على السن المكسور لوضع التاج",polishTip:"!لمّع كل الأسنان",
  gentleWarn:"!برفق على اللثة",timeUp:"!الوقت يمر",
  ranks:["متدرب","مساعد","طبيب أسنان","جراح","خبير زراعة الأسنان"],
  missions:{scale:"🪥 المهمة: إزالة كل الجير",cavity:"🦷 المهمة: علاج التسوس",crown:"👑 المهمة: تركيب تاج الزركون"},
@@ -276,10 +276,12 @@ const PATIENTS=[
 /* 12 levels: type + difficulty */
 const LEVELS=[
  {type:'scale',n:3,time:60},{type:'scale',n:4,time:60},{type:'cavity',n:2,time:70},{type:'scale',n:5,time:60},
- {type:'cavity',n:3,time:70},{type:'crown',time:60},{type:'scale',n:6,time:60},{type:'cavity',n:3,time:70},
- {type:'crown',time:55},{type:'scale',n:7,time:60},{type:'cavity',n:4,time:70},{type:'crown',time:50}
+ {type:'cavity',n:2,time:70},{type:'crown',time:60},{type:'scale',n:6,time:60},{type:'cavity',n:3,time:75},
+ {type:'crown',time:55},{type:'scale',n:7,time:60},{type:'cavity',n:3,time:75},{type:'crown',time:50}
 ];
-const GAME_ICON={scale:'🪥',cavity:'🔧',crown:'👑'};
+const SVG_TURBINE='<svg viewBox="0 0 64 64" width="1.35em" height="1.35em" style="vertical-align:middle"><rect x="2" y="34" width="42" height="13" rx="6.5" transform="rotate(-35 23 40)" fill="#12a5b0"/><rect x="4" y="43" width="14" height="7" rx="3.5" transform="rotate(-35 11 46)" fill="#0b6e78"/><circle cx="45" cy="17" r="10" fill="#0b6e78"/><circle cx="45" cy="17" r="4" fill="#7fd8de"/><rect x="42.5" y="26" width="5" height="13" rx="2.5" fill="#98a4ad"/><path d="M42.5 36 L47.5 36 L45 42 Z" fill="#6d7a84"/></svg>';
+const SVG_SPATULA='<svg viewBox="0 0 64 64" width="1.35em" height="1.35em" style="vertical-align:middle"><rect x="2" y="44" width="30" height="8" rx="4" transform="rotate(-35 17 48)" fill="#c98f00"/><rect x="24" y="26" width="18" height="7" rx="3.5" transform="rotate(-35 33 29)" fill="#dfe3e8"/><path d="M36 6 Q56 8 54 26 Q52 38 38 34 Q28 30 30 18 Q32 8 36 6Z" fill="#e8eef2"/><circle cx="46" cy="15" r="8" fill="#fdfdf6" stroke="#d8d2c0" stroke-width="2.5"/><circle cx="42" cy="20" r="4" fill="#f3ead0"/></svg>';
+const GAME_ICON={scale:'🪥',cavity:SVG_TURBINE,crown:'👑'};
 
 /* ================= helpers ================= */
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
@@ -479,28 +481,28 @@ function buildCavity(ovl,lv){
  });
  /* toolbar: drill then fill */
  const tb=$('#toolbar');
- tb.innerHTML=`<div class="tool on" data-tool="drill"><span class="ico">🔧</span>Fraise</div><div class="tool" data-tool="fill"><span class="ico">🩹</span>Composite</div>`;
+ tb.innerHTML=`<div class="tool on" data-tool="drill"><span class="ico">${SVG_TURBINE}</span>${t('toolDrill')}</div><div class="tool" data-tool="fill"><span class="ico">${SVG_SPATULA}</span>${t('toolFill')}</div>`;
  tb.querySelectorAll('.tool').forEach(el=>el.onclick=()=>{tb.querySelectorAll('.tool').forEach(x=>x.classList.remove('on'));el.classList.add('on');G.tool=el.dataset.tool;sfx.tap();
    $('#toolTip').textContent=G.tool==='drill'?t('drillTip'):t('fillTip');
-   $('#toolCursor').textContent=G.tool==='drill'?'🔧':'🩹';});
- G.tool='drill';$('#toolCursor').textContent='🔧';
+   $('#toolCursor').innerHTML=G.tool==='drill'?SVG_TURBINE:SVG_SPATULA;});
+ G.tool='drill';$('#toolCursor').innerHTML=SVG_TURBINE;
  let holding=null,holdTimer=null;
  stage.onpointerdown=e=>{
   const {x,y}=svgPoint(e);const r=app.getBoundingClientRect();
   $('#toolCursor').style.display='block';$('#toolCursor').style.left=(e.clientX-r.left)+'px';$('#toolCursor').style.top=(e.clientY-r.top)+'px';
-  const tg=G.targets.find(t=>Math.hypot(x-t.cx,y-t.cy)<24);
+  const tg=G.targets.find(t=>Math.hypot(x-t.cx,y-t.cy)<38);
   if(!tg)return; // no penalty for missed taps — keep it easy and fun
   if(G.tool==='drill'&&tg.state==='rot'){
     holding=tg;
     holdTimer=setInterval(()=>{
-      if(!G||!holding)return;holding.hp-=14;sfx.drill();vibrate(15);
+      if(!G||!holding)return;holding.hp-=22;sfx.drill();vibrate(15);
       holding.el.querySelector('.ring').style.strokeDashoffset=107*Math.max(0,holding.hp)/100;
       if(holding.hp<=0){holding.state='clean';holding.el.innerHTML=`<circle cx="${holding.cx}" cy="${holding.cy}" r="12" fill="#d8d2c0" stroke="#bfb89f" stroke-width="2"/>`;sfx.pop();
         clearInterval(holdTimer);holding=null;
         if(G.targets.every(t=>t.state!=='rot')){$('#toolTip').textContent=t('fillTip');
           const fillBtn=tb.querySelector('[data-tool=fill]');fillBtn.click();}
       }
-    },90);
+    },75);
   } else if(G.tool==='fill'&&tg.state==='clean'){
     tg.state='filled';
     tg.el.innerHTML=`<circle cx="${tg.cx}" cy="${tg.cy}" r="12" fill="#fdfdf6" stroke="#e0dbc8" stroke-width="3"/><text x="${tg.cx}" y="${tg.cy+5}" text-anchor="middle" font-size="14">✨</text>`;
