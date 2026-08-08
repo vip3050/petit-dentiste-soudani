@@ -275,9 +275,9 @@ const PATIENTS=[
 ];
 /* 12 levels: type + difficulty */
 const LEVELS=[
- {type:'scale',n:4,time:35},{type:'scale',n:6,time:32},{type:'cavity',n:2,time:40},{type:'scale',n:8,time:30},
- {type:'cavity',n:3,time:40},{type:'crown',time:35},{type:'scale',n:10,time:28},{type:'cavity',n:4,time:38},
- {type:'crown',time:30},{type:'scale',n:12,time:26},{type:'cavity',n:5,time:36},{type:'crown',time:26}
+ {type:'scale',n:3,time:60},{type:'scale',n:4,time:60},{type:'cavity',n:2,time:70},{type:'scale',n:5,time:60},
+ {type:'cavity',n:3,time:70},{type:'crown',time:60},{type:'scale',n:6,time:60},{type:'cavity',n:3,time:70},
+ {type:'crown',time:55},{type:'scale',n:7,time:60},{type:'cavity',n:4,time:70},{type:'crown',time:50}
 ];
 const GAME_ICON={scale:'🪥',cavity:'🔧',crown:'👑'};
 
@@ -445,10 +445,10 @@ function buildScale(ovl,lv){
    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
    const y=p.top?p.cy-40:p.cy+28;
    g.innerHTML=`<ellipse cx="${p.cx}" cy="${y}" rx="14" ry="16" fill="#b98a3e" opacity=".95"/><ellipse cx="${p.cx-4}" cy="${y-4}" rx="6" ry="7" fill="#8a6224"/>`;
-   ovl.appendChild(g);return{el:g,cx:p.cx,cy:y,hp:100+ (curLevel*6)};
+   ovl.appendChild(g);return{el:g,cx:p.cx,cy:y,hp:45+curLevel*2};
  });
  let active=false,lastSpark=0;
- stage.onpointerdown=e=>{active=true;moveTool(e);e.preventDefault()};
+ stage.onpointerdown=e=>{active=true;moveTool(e);scrub(e);e.preventDefault()};
  stage.onpointermove=e=>{if(!active)return;moveTool(e);scrub(e);};
  stage.onpointerup=stage.onpointercancel=()=>{active=false;$('#toolCursor').style.display='none'};
  function moveTool(e){const tc=$('#toolCursor');tc.style.display='block';const r=app.getBoundingClientRect();tc.style.left=(e.clientX-r.left)+'px';tc.style.top=(e.clientY-r.top)+'px';}
@@ -457,7 +457,7 @@ function buildScale(ovl,lv){
   G.targets.forEach(tg=>{
    if(tg.hp<=0)return;
    const d=Math.hypot(x-tg.cx,y-tg.cy);
-   if(d<26){hit=true;tg.hp-=8;sfx.scrub();tg.el.style.opacity=Math.max(0,tg.hp/110);
+   if(d<42){hit=true;tg.hp-=16;sfx.scrub();tg.el.style.opacity=Math.max(0,tg.hp/50);
      if(Date.now()-lastSpark>120){lastSpark=Date.now();const r=app.getBoundingClientRect();sparkle(cx-r.left,cy-r.top);}
      if(tg.hp<=0){tg.el.remove();sfx.pop();vibrate(30);checkScaleDone();}}
   });
@@ -489,14 +489,11 @@ function buildCavity(ovl,lv){
   const {x,y}=svgPoint(e);const r=app.getBoundingClientRect();
   $('#toolCursor').style.display='block';$('#toolCursor').style.left=(e.clientX-r.left)+'px';$('#toolCursor').style.top=(e.clientY-r.top)+'px';
   const tg=G.targets.find(t=>Math.hypot(x-t.cx,y-t.cy)<24);
-  if(!tg){ // touched gums/teeth wrongly with drill = ouch
-    if(G.tool==='drill'&&(y<95||y>335))loseHeart();
-    return;
-  }
+  if(!tg)return; // no penalty for missed taps — keep it easy and fun
   if(G.tool==='drill'&&tg.state==='rot'){
     holding=tg;
     holdTimer=setInterval(()=>{
-      if(!G||!holding)return;holding.hp-=7;sfx.drill();vibrate(15);
+      if(!G||!holding)return;holding.hp-=14;sfx.drill();vibrate(15);
       holding.el.querySelector('.ring').style.strokeDashoffset=107*Math.max(0,holding.hp)/100;
       if(holding.hp<=0){holding.state='clean';holding.el.innerHTML=`<circle cx="${holding.cx}" cy="${holding.cy}" r="12" fill="#d8d2c0" stroke="#bfb89f" stroke-width="2"/>`;sfx.pop();
         clearInterval(holdTimer);holding=null;
@@ -551,17 +548,17 @@ function placeCrownPhase(ovl){
  tgt.setAttribute('cx',cx);tgt.setAttribute('cy',cy);tgt.setAttribute('r','20');tgt.setAttribute('fill','none');
  tgt.setAttribute('stroke','#3ecf8e');tgt.setAttribute('stroke-width','3');tgt.setAttribute('stroke-dasharray','6 6');
  ovl.appendChild(tgt);
- let t0=performance.now();const range=120-curLevel*3;
+ let t0=performance.now();const range=85-curLevel*2;
  G.crownAnim=requestAnimationFrame(function anim(now){
   if(!G||G.phase!=='place')return;
-  const x=cx+Math.sin((now-t0)/380)*range;
+  const x=cx+Math.sin((now-t0)/560)*range;
   crown.setAttribute('transform',`translate(${x} ${cy})`);G.crownX=x;
   G.crownAnim=requestAnimationFrame(anim);
  });
  stage.onpointerdown=()=>{
   if(!G||G.phase!=='place')return;
   const d=Math.abs(G.crownX-cx);
-  if(d<14){ // seated!
+  if(d<24){ // seated!
    G.phase='done';cancelAnimationFrame(G.crownAnim);
    crown.setAttribute('transform',`translate(${cx} ${cy})`);tgt.remove();G.crownSpot.crack.remove();
    sfx.pop();vibrate([40,40,40]);
