@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+}
+
+// ---------------------------------------------------------------------------
+// Signature de release
+// Créez un fichier keystore.properties à la racine du projet (NON versionné) :
+//   storeFile=/chemin/absolu/vers/super-dentiste.jks
+//   storePassword=VOTRE_MOT_DE_PASSE
+//   keyAlias=superdentiste
+//   keyPassword=VOTRE_MOT_DE_PASSE
+// Sans ce fichier, le build de release utilise la signature debug (test uniquement).
+// ---------------------------------------------------------------------------
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+def hasKeystore = keystorePropertiesFile.exists()
+if (hasKeystore) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    namespace 'com.cabinetsoudani.superdentiste'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.cabinetsoudani.superdentiste"
+        minSdk 23
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+        resourceConfigurations += ["fr", "ar", "en"]
+    }
+
+    signingConfigs {
+        if (hasKeystore) {
+            release {
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig hasKeystore ? signingConfigs.release : signingConfigs.debug
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Le jeu est un fichier HTML unique : on ne le compresse pas pour un chargement instantané
+    androidResources {
+        noCompress 'html'
+    }
+
+    bundle {
+        language { enableSplit = false }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.webkit:webkit:1.11.0'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+}

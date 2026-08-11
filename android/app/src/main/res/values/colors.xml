@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="teal_dark">#0b6e78</color>
+    <color name="teal">#12a5b0</color>
+    <color name="teal_light">#7fd8de</color>
+    <color name="gold">#f5b301</color>
+    <color name="ic_launcher_background">#0b6e78</color>
+</resources>

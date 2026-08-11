@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">سوبر طبيب الأسنان</string>
+    <string name="no_app_found">لا يوجد تطبيق لفتح هذا الرابط</string>
+</resources>
