@@ -1110,5 +1110,24 @@ $('#nextBtn').onclick=()=>{sfx.tap();if(curLevel<LEVELS.length-1)openIntro(curLe
 applyLang();refreshHud();
 if(S.doc)$$('.doc-card').forEach(c=>{if(c.dataset.doc===S.doc){c.classList.add('selected');$('#toMapBtn').style.visibility='visible';}});
 </script>
+
+<script>
+// Raccourcis de capture (page de screenshots uniquement) :
+//   #lvN  -> lance directement le niveau N
+//   #win  -> affiche l'écran de résultat 3 étoiles
+addEventListener('load',function(){
+  setTimeout(function(){
+    var h=location.hash||'';
+    if(h.indexOf('#lv')===0){
+      var n=parseInt(h.slice(3),10)||1; openIntro(n-1); startGame();
+    } else if(h==='#win'){
+      openIntro(0); startGame();
+      G.left=G.time*0.92; G.penalty=0; G.phase='done';
+      if(G.targets)G.targets.forEach(function(t){t.hp=0;t.state='filled';t.alive=false;});
+      finish();
+    }
+  },260);
+});
+</script>
 </body>
 </html>
